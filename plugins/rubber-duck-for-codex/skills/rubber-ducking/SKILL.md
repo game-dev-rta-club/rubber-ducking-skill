@@ -50,15 +50,11 @@ Open -> Checkpoint* -> Close
    - Keep the prompt self-contained. Do not rely on forked context for the draft, evidence, current-turn commentary, or decision point; include those explicitly in the prompt under the required labels.
    - Tell the partner not to start another delegation loop; their next response is the deliverable.
 
-3. Ask for pressure, not approval.
-   Require the partner to return:
-   - `Contradictions or weak assumptions`
-   - `User-request fulfillment`
-   - `Missing considerations`
-   - `Unnecessary or overbuilt parts`
-   - `User-intent fit`
-   - `Suggested changes`
-   - `One question for the next round` when another round would improve the result
+3. Match the pressure to the dialogue moment.
+   Use a light Open contract, a focused Checkpoint contract, and a deeper Close contract:
+   - Open: calibrate the request, success criteria, early watchpoints, and when to checkpoint. Do not ask for final-answer fulfillment scoring when no draft or evidence exists.
+   - Checkpoint: inspect new evidence, drift, changed assumptions, missing results, and the smallest useful adjustment.
+   - Close: inspect the proposed final answer against the user's requested outcome, concrete result, omissions, and unnecessary detail.
 
 4. Checkpoint when the work evolves.
    Send a short follow-up with explicit new context when:
@@ -92,7 +88,7 @@ Open -> Checkpoint* -> Close
 
 ## Partner Prompt Contract
 
-Use this template for every partner prompt. Replace bracketed sections with the current task details.
+Use this base template for every partner prompt. Replace bracketed sections with the current task details, then add the phase-specific check block that matches `Dialogue moment`.
 
 ```text
 ==================== CONTEXT SWITCH ====================
@@ -116,7 +112,7 @@ Original user request:
 [quote or summarize the user's newest request and any constraints]
 
 Proposed next response:
-[paste the exact user-facing draft, or write "none" if the review is about a decision rather than a draft]
+[paste the exact user-facing draft, or write "none"; for Open, usually write "none" unless a concrete draft already exists]
 
 Decision under review:
 [paste the plan, hypothesis, or decision to inspect, or write "none" if the proposed response is the only review target]
@@ -128,14 +124,50 @@ New context since last checkpoint:
 [for Checkpoint and Close, paste new evidence, progress, revised plan, or draft changes; for Open, write "none"]
 
 Specific checks requested:
-- Does the draft fully answer what the user asked for?
-- Are any requested conditions unmet or replaced by a safer but different answer?
-- If the user asked for investigation, execution, verification, comparison, or a concrete decision, does the draft report the concrete result?
-- Has the work drifted away from the original user request?
-- What should be changed before replying to the user?
+[paste the phase-specific bullet list below]
 ```
 
 Avoid shorthand such as "parent thread" unless the prompt defines it. Prefer "caller", "forked conversation", "inherited history", and "this new request" so the partner does not confuse their role with running another subagent.
+
+### Open Checks
+
+Use Open before substantive work begins. Keep it light but sharp. Ask the partner to calibrate the starting direction, not to review a final answer. In Open, do not ask the partner to fill Close or Checkpoint fields unless a concrete draft or result already exists and you explicitly need that review.
+
+```text
+- Restate the user's actual request and success criteria in one or two lines.
+- Name 1-3 early watchpoints, such as scope drift, missing constraints, premature conclusions, or likely evidence gaps.
+- Say what evidence or result would matter most before the caller commits to an answer.
+- Suggest when the caller should checkpoint next.
+- Ask at most one blocking question. If none is needed, say so.
+```
+
+For Open, avoid asking whether a draft fully answers the user, whether the result was reported, or what final wording should be revised unless a concrete draft already exists. A normal Open response should be short, often 5-8 bullets total.
+
+### Checkpoint Checks
+
+Use Checkpoint after evidence, work state, uncertainty, or decisions change.
+
+```text
+- Has the work drifted away from the user's original request or success criteria?
+- Does the new evidence support the current direction, or does it change the plan?
+- What concrete result, verification, comparison, or artifact is still missing?
+- What should be removed, narrowed, or de-emphasized before continuing?
+- What is the smallest useful next adjustment?
+- Is another checkpoint needed? If yes, when?
+```
+
+### Close Checks
+
+Use Close before replying to the user.
+
+```text
+- Does the proposed final answer fully answer what the user asked for?
+- Are any requested conditions unmet or replaced by a safer but different answer?
+- If the user asked for investigation, execution, verification, comparison, or a concrete decision, does the answer report the concrete result?
+- Is the answer honest about verification, uncertainty, or remaining risk?
+- Has the work drifted away from the original user request?
+- What should be changed, removed, or clarified before replying to the user?
+```
 
 ## Partner Context Modes
 

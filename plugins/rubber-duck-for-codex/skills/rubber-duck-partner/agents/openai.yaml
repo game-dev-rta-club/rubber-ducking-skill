@@ -1,4 +1,4 @@
 interface:
   display_name: "Rubber Duck Partner"
-  short_description: "Partner role for draft pressure-testing"
-  default_prompt: "Use $rubber-duck-partner to pressure-test this draft against the user's requested outcome in the current conversation; do not launch or delegate to another worker."
+  short_description: "Partner role for phased reasoning checks"
+  default_prompt: "Use $rubber-duck-partner to calibrate Open, pressure-test Checkpoint, or review Close against the user's requested outcome; do not launch or delegate to another worker."
