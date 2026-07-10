@@ -1,0 +1,20 @@
+{
+  "name": "rubber-duck-for-codex",
+  "interface": {
+    "displayName": "Rubber Duck For Codex"
+  },
+  "plugins": [
+    {
+      "name": "rubber-duck-for-codex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rubber-duck-for-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

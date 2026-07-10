@@ -1,0 +1,23 @@
+{
+  "name": "rubber-duck-for-codex",
+  "version": "0.1.0",
+  "description": "Rubber-duck dialogue skills for pressure-testing Codex reasoning.",
+  "author": {
+    "name": "nikollson",
+    "url": "https://github.com/nikollson"
+  },
+  "homepage": "https://github.com/nikollson/rubber-duck-for-codex",
+  "repository": "https://github.com/nikollson/rubber-duck-for-codex",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Rubber Duck For Codex",
+    "shortDescription": "Pressure-test Codex reasoning with partner dialogue.",
+    "longDescription": "Rubber Duck For Codex adds two skills: one to run a bounded rubber-duck dialogue before non-trivial responses, and one to act as the partner that checks drafts, decisions, evidence, and user-request fulfillment.",
+    "developerName": "nikollson",
+    "category": "Productivity",
+    "capabilities": [
+      "skills"
+    ],
+    "defaultPrompt": "Use rubber-duck dialogue to pressure-test this response."
+  }
+}
