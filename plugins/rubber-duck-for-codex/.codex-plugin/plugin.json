@@ -1,7 +1,7 @@
 {
   "name": "rubber-duck-for-codex",
-  "version": "0.1.0",
-  "description": "Rubber-duck dialogue skills for pressure-testing Codex reasoning.",
+  "version": "0.2.0",
+  "description": "Rubber-ducking skills for checkpointed Codex reasoning.",
   "author": {
     "name": "nikollson",
     "url": "https://github.com/nikollson"
@@ -11,13 +11,13 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Rubber Duck For Codex",
-    "shortDescription": "Pressure-test Codex reasoning with partner dialogue.",
-    "longDescription": "Rubber Duck For Codex adds two skills: one to run a bounded rubber-duck dialogue before non-trivial responses, and one to act as the partner that checks drafts, decisions, evidence, and user-request fulfillment.",
+    "shortDescription": "Checkpoint Codex reasoning with a partner.",
+    "longDescription": "Rubber Duck For Codex adds two skills: one to open, checkpoint, and close a rubber-ducking dialogue during non-trivial turns, and one to act as the partner that checks drafts, decisions, evidence, drift, and user-request fulfillment.",
     "developerName": "nikollson",
     "category": "Productivity",
     "capabilities": [
       "skills"
     ],
-    "defaultPrompt": "Use rubber-duck dialogue to pressure-test this response."
+    "defaultPrompt": "Use rubber-ducking to pressure-test this turn."
   }
 }

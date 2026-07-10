@@ -1,28 +1,46 @@
 ---
-name: rubber-duck-dialogue
-description: Use when preparing any non-trivial response or action that involves reasoning, planning, implementation, debugging, review, research, writing, design, judgment, tool execution, or synthesis. Use before finalizing drafts, plans, decisions, code changes, explanations, or user-facing answers where independent pressure-testing could materially improve quality, and during work when thinking has become linear or uncertain. Skip greetings, acknowledgments, exact status reports, trivial command results, truly simple direct answers, or requests where the user asks for a direct answer or no delegation. Start a fresh rubber-duck-partner dialogue and keep it bounded.
+name: rubber-ducking
+description: Use at the beginning of any non-trivial turn that involves reasoning, planning, implementation, debugging, review, research, writing, design, judgment, tool execution, or synthesis. Open a rubber-duck-partner dialogue before substantive work starts, checkpoint when evidence, uncertainty, plans, or decisions change, and close before the final response. Skip greetings, acknowledgments, exact status reports, trivial command results, truly simple direct answers, or requests where the user asks for a direct answer or no delegation.
 ---
 
-# Rubber Duck Dialogue
+# Rubber Ducking
 
-Use a fresh thinking partner to bend straight-line reasoning before you answer. The partner is not the decision-maker; they challenge, trim, and sharpen your draft or current plan.
+Use a fresh thinking partner to bend straight-line reasoning throughout a non-trivial turn. The partner is not the decision-maker; they challenge, trim, and sharpen your plan, progress, evidence, and final draft.
 
 When a partner task inherits earlier chat history from a fork, assume the partner experiences the old text as one continuous conversation until your new prompt arrives. Make the context switch explicit: separate inherited history from the new partner task, and state that the next section is addressed to the receiving agent.
 
 ## Trigger Rule
 
-Use this skill by default for any request that requires thought or action where a second reader could catch a meaningful flaw.
+Open this skill at the start of any request that requires thought or action where a second reader could catch a meaningful flaw. Do this before substantive work starts.
 
 Skip only when the response is a near-immediate social reply, simple acknowledgment, exact status report, trivial command result, direct one-sentence answer with no tool use or decision, or the user explicitly asks for a direct answer or no delegation. If unsure, ask: "Could a second reader catch a meaningful flaw here?" If yes, use the skill.
 
 If you were asked to act as the rubber duck partner for another agent, use `rubber-duck-partner` instead. Do not start another rubber-duck dialogue from inside the partner role.
 
+## Dialogue Modes
+
+Choose the lightest mode that protects quality:
+
+- Checkpointed dialogue: default for non-trivial turns. Open before substantive work, then checkpoint as needed.
+- Close-only review: narrow exception for explicit review, partner, fork, or final-draft-check requests where the task is only to inspect an already-formed draft or decision.
+
+Checkpointed dialogue follows:
+
+```text
+Open -> Checkpoint* -> Close
+```
+
+`Checkpoint*` means zero or more checkpoints after Open. Do not message the partner after every small action. Use checkpoints only when a second reader could change direction or catch a meaningful omission.
+
 ## Workflow
 
-1. Build a compact working brief before contacting the partner:
+1. Open early.
+   Start a partner dialogue before substantive work on a non-trivial turn. Build a compact working brief:
    - user's request and relevant constraints
    - current context needed to judge the answer
-   - your draft, plan, hypothesis, or decision point
+   - intended outcome and success criteria
+   - your initial plan, hypothesis, or decision point
+   - known risks, uncertainties, or evidence gaps
    - what you want checked
 
 2. Start a fresh partner dialogue.
@@ -42,19 +60,31 @@ If you were asked to act as the rubber duck partner for another agent, use `rubb
    - `Suggested changes`
    - `One question for the next round` when another round would improve the result
 
-4. Continue the dialogue until the useful uncertainty is resolved.
+4. Checkpoint when the work evolves.
+   Send a short follow-up with explicit new context when:
+   - new evidence appears
+   - the plan changes
+   - a work chunk completes and affects the next step
+   - uncertainty rises
+   - a decision point appears
+   - the draft starts drifting away from the user's actual request
+
+   Each checkpoint must include `New context since last checkpoint`; partner threads do not automatically receive caller-side context added after the fork.
+
+5. Continue the dialogue until the useful uncertainty is resolved.
    - Do not stop after the first reply if the partner asks a material question.
    - Keep each follow-up narrow.
    - Usually use one or two rounds.
    - Stop after two rounds unless the remaining uncertainty is high-risk, user-visible, or explicitly requested by the user.
    - Do not enter finalization while another checkpoint is still expected.
 
-5. Decide what to adopt.
+6. Decide what to adopt.
    - Adopt partner suggestions only when they improve the answer.
    - Explicitly reject suggestions that conflict with the user request, known facts, tool evidence, or scope.
    - Do not outsource responsibility for the final answer.
 
-6. Finalize for the user.
+7. Close before finalizing for the user.
+   Before the final response, ask the partner to check the proposed final answer or decision unless the whole dialogue already resolved that check.
    - Do not expose the whole internal dialogue unless the user asked to see it.
    - Close the partner agent when the dialogue is complete, unless the user explicitly asked to keep the partner agent open or closing fails.
    - Mention the partner thread/link only when the user explicitly asked to inspect the dialogue or the task specifically requires an audit link.
@@ -79,6 +109,9 @@ This is not a request to arrange, delegate, implement, continue the caller's tas
 
 Use rubber-duck-partner.
 
+Dialogue moment:
+[Open / Checkpoint / Close]
+
 Original user request:
 [quote or summarize the user's newest request and any constraints]
 
@@ -91,10 +124,14 @@ Decision under review:
 Evidence / results already gathered:
 [list concrete tool output, thread ids, files, tests, or say "none"]
 
+New context since last checkpoint:
+[for Checkpoint and Close, paste new evidence, progress, revised plan, or draft changes; for Open, write "none"]
+
 Specific checks requested:
 - Does the draft fully answer what the user asked for?
 - Are any requested conditions unmet or replaced by a safer but different answer?
 - If the user asked for investigation, execution, verification, comparison, or a concrete decision, does the draft report the concrete result?
+- Has the work drifted away from the original user request?
 - What should be changed before replying to the user?
 ```
 

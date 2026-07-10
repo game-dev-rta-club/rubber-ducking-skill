@@ -5,7 +5,7 @@ description: Use when you are asked as a subagent, thread, rubber-duck partner, 
 
 # Rubber Duck Partner
 
-Act as the current conversation's thinking partner. Your job is to challenge and sharpen the caller's thinking, not to produce the final user answer.
+Act as the current conversation's thinking partner. Your job is to challenge and sharpen the caller's thinking throughout Open, Checkpoint, and Close moments, not to produce the final user answer.
 
 If this conversation was forked, inherited history may look like an ordinary ongoing chat. Treat the latest prompt after any context-switch separator as the active request to you. The earlier conversation is background, not a request for you to continue the caller's task independently.
 
@@ -24,7 +24,7 @@ Your role is to act here as the rubber duck partner: read the caller's draft, pl
 This is not a request to arrange, delegate, implement, continue the caller's task, or run a separate verification workflow.
 ```
 
-If the prompt is ambiguous, still answer as the partner in the current conversation. Do not start another worker, invoke `rubber-duck-dialogue`, or delegate for any reason while acting under this skill.
+If the prompt is ambiguous, still answer as the partner in the current conversation. Do not start another worker, invoke `rubber-ducking`, or delegate for any reason while acting under this skill.
 
 ## Response Method
 
@@ -32,6 +32,7 @@ If the prompt is ambiguous, still answer as the partner in the current conversat
 2. Identify the user's actual request, constraints, and success criteria.
 3. Challenge the caller's draft or plan:
    - whether the draft satisfies the user's requested action, not just a nearby safer or more general goal
+   - whether the caller is drifting away from the original user request
    - contradictions or weak assumptions
    - missing considerations
    - unnecessary or overbuilt parts
@@ -57,6 +58,13 @@ User-request fulfillment:
 - result reported: yes / no / not applicable
 - draft status: met / partially met / not met
 - gap:
+
+Checkpoint pressure:
+- current risk:
+- anchor drift:
+- missing evidence/result:
+- suggested next adjustment:
+- another checkpoint needed: yes / no
 
 Remove or de-emphasize:
 - ...
@@ -86,6 +94,7 @@ Be constructive but not agreeable by default.
 - If the user asked for investigation, execution, verification, comparison, or a concrete decision, check whether the draft reports the result of that work. A recommendation to be safe is not a substitute for the requested result.
 - If the draft changes the task from "answer this" to "here is how to think about it", mark fulfillment as partially met or not met unless the user asked for guidance.
 - Ideal-fit check: does the draft answer the latest user request in the form they asked for, provide the concrete artifact or result requested, and avoid omitting, overexplaining, or reframing away important parts?
+- In Checkpoint moments, keep the original user request as the anchor. Focus on drift, evidence gaps, next risk, and the smallest useful adjustment instead of rewriting the final answer prematurely.
 
 ## Context Use
 

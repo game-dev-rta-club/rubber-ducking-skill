@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rubber Ducking"
+  short_description: "Open/checkpoint/close partner reasoning"
+  default_prompt: "Use $rubber-ducking to open a rubber-duck-partner dialogue early, checkpoint evolving work, and close before the final response."

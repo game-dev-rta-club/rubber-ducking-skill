@@ -1,4 +1,0 @@
-interface:
-  display_name: "Rubber Duck Dialogue"
-  short_description: "Dialogue loop for sharper agent thinking"
-  default_prompt: "Use $rubber-duck-dialogue to start a fresh rubber-duck-partner review before finalizing non-trivial reasoning; pass the draft explicitly and keep the loop bounded."
