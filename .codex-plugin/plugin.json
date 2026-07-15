@@ -1,0 +1,24 @@
+{
+  "name": "agent-skills",
+  "version": "1.0.0",
+  "description": "Stable, reusable agent skills maintained by Game Dev RTA Club.",
+  "author": {
+    "name": "Game Dev RTA Club",
+    "url": "https://github.com/game-dev-rta-club"
+  },
+  "homepage": "https://github.com/game-dev-rta-club/agent-skills",
+  "repository": "https://github.com/game-dev-rta-club/agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Game Dev RTA Agent Skills",
+    "shortDescription": "Stable workflows for AI coding agents.",
+    "longDescription": "Reusable agent skills maintained as small, independently understandable workflows.",
+    "developerName": "Game Dev RTA Club",
+    "category": "Productivity",
+    "capabilities": [
+      "skills"
+    ],
+    "defaultPrompt": "Use rubber-duck-caller to pressure-test this turn."
+  }
+}

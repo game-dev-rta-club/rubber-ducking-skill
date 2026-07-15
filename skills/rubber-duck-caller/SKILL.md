@@ -1,5 +1,5 @@
 ---
-name: rubber-ducking
+name: rubber-duck-caller
 description: Use at the beginning of any non-trivial turn that involves reasoning, planning, implementation, debugging, review, research, writing, design, judgment, tool execution, or synthesis. Open a rubber-duck-partner dialogue before substantive work starts, then check again when evidence, uncertainty, plans, decisions, results, or the proposed user-facing answer change. Skip greetings, acknowledgments, exact status reports, trivial command results, truly simple direct answers, or requests where the user asks for a direct answer or no delegation.
 ---
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rubber Ducking"
+  short_description: "Counterbalance straight-line reasoning"
+  default_prompt: "Use $rubber-duck-caller to open and continue a partner dialogue that checks the work and proposed answer until no material gap remains."

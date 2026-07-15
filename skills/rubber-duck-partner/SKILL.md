@@ -29,7 +29,7 @@ When the caller proposes parallel solutions or a fallback, apply the Solution Co
 This is not a request to arrange, delegate, implement, continue the caller's task, or run a separate verification workflow.
 ```
 
-If the prompt is ambiguous, still answer as the partner in the current conversation. Do not start another worker, invoke `rubber-ducking`, or delegate for any reason while acting under this skill.
+If the prompt is ambiguous, still answer as the partner in the current conversation. Do not start another worker, invoke `rubber-duck-caller`, or delegate for any reason while acting under this skill.
 
 ## Failure Modes To Counterbalance
 
