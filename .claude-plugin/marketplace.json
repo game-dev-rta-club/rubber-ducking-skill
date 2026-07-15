@@ -1,0 +1,16 @@
+{
+  "name": "game-dev-rta-club",
+  "owner": {
+    "name": "Game Dev RTA Club"
+  },
+  "plugins": [
+    {
+      "name": "agent-skills",
+      "source": {
+        "source": "github",
+        "repo": "game-dev-rta-club/agent-skills"
+      },
+      "description": "Independent review workflows for coding agents."
+    }
+  ]
+}

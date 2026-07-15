@@ -1,14 +1,14 @@
 {
-  "name": "rubber-duck-for-codex",
+  "name": "game-dev-rta-club",
   "interface": {
-    "displayName": "Rubber Duck For Codex"
+    "displayName": "Game Dev RTA Club"
   },
   "plugins": [
     {
-      "name": "rubber-duck-for-codex",
+      "name": "agent-skills",
       "source": {
-        "source": "local",
-        "path": "./plugins/rubber-duck-for-codex"
+        "source": "url",
+        "url": "https://github.com/game-dev-rta-club/agent-skills.git"
       },
       "policy": {
         "installation": "AVAILABLE",
