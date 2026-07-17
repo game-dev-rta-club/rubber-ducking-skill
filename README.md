@@ -8,30 +8,35 @@
 
 Rubber Ducking is an Agent Skill for Codex and Claude Code. It is designed to
 activate across non-trivial planning, implementation, debugging, research, and
-writing. Once active, the caller starts a separate subagent partner, returns
-to that dialogue at key checkpoints, and checks again before answering. You do
-not have to orchestrate the subagent yourself.
+writing. When the caller is active and subagent spawning is available, it
+starts a separate partner dialogue, returns to it at key checkpoints, and
+checks again before answering. The caller handles that orchestration for you.
 
-```text
-You: Find why CI is flaky, fix it, and verify the result.
+**Illustrative example**
 
-Before work
-  Agent: I will start by treating this as a test bug.
-  Partner: What evidence separates a test failure from a runner failure?
-  Agent: Successful runs use an earlier runner image. I will test that
-         difference first.
+**You:** Find why CI is flaky, fix it, and verify the result.
 
-Evidence changed
-  Partner: Material gap: One failed run is not enough.
-           Next action: Compare all runs since the image changed.
-  Agent: Every failure starts after that change, and pinning the previous
-         image makes the test pass. I will fix the runner configuration.
+**Before work**
 
-Before answer
-  Partner: Material gap: none. Next action: none.
-```
+- **Agent:** I will start by treating this as a test bug.
+- **Partner:** What evidence separates a test failure from a runner failure?
+- **Agent:** Successful runs use an earlier runner image. I will test that
+  difference first.
 
-One request; the caller handles the subagent dialogue as the work changes.
+**Evidence changed**
+
+- **Partner:** Material gap: Timing alone does not isolate the runner image.
+  Next action: Run the same revision repeatedly on both images.
+- **Agent:** I ran the same revision repeatedly on both images. In those runs,
+  failures reproduced on the new image but not the previous one. I pinned the
+  previous image in the runner configuration and reran the affected jobs; they
+  passed.
+
+**Before answer**
+
+- **Partner:** Material gap: none. Next action: none.
+
+One request; the caller returns to the same partner dialogue as the work changes.
 
 ## Why it is different
 
@@ -40,11 +45,12 @@ early assumptions and blind spots can reinforce themselves instead of being
 re-examined. Rubber Ducking inserts a focused thinking partner into that
 trajectory while the task is still in progress.
 
-| Approach | Difference |
-| --- | --- |
-| Checklist review | A checklist says what to inspect; the caller also manages when to bring the partner back into the task. |
-| Ordinary rubber duck | A passive duck listens; the partner returns a focused question or correction. |
-| One-shot subagent review | A one-shot review inspects one snapshot; Rubber Ducking revisits the same dialogue at material checkpoints. |
+- **Checklist review:** A checklist says what to inspect; the caller also
+  manages when to bring the partner back into the task.
+- **Ordinary rubber duck:** A passive duck listens; the partner returns a
+  focused question or correction.
+- **One-shot subagent review:** A one-shot review inspects one snapshot; Rubber
+  Ducking revisits the same dialogue at material checkpoints.
 
 Use it across migration plans, uncertain bug fixes, implementation decisions,
 research conclusions, and user-facing drafts. The caller skips greetings,
@@ -88,12 +94,12 @@ Use rubber-duck-caller to investigate why this test is flaky, fix it, and verify
 
 The partner concentrates on four questions:
 
-| Check | Question |
-| --- | --- |
-| Alignment | Does the work still match the user's latest requirements? |
-| Evidence | Do direct conversation, artifacts, and results support the conclusion? |
-| Simplicity | Is each fallback, branch, or extra layer required by evidence? |
-| Completion | Is the highest-leverage gap resolved before the answer is sent? |
+- **Alignment:** Does the work still match the user's latest requirements?
+- **Evidence:** Do direct conversation, artifacts, and results support the
+  conclusion?
+- **Simplicity:** Is each fallback, branch, or extra layer required by evidence?
+- **Completion:** Is the highest-leverage gap resolved before the answer is
+  sent?
 
 The caller remains responsible for the work and decides what to adopt. The
 partner does not implement the task or make decisions for the user.
@@ -102,9 +108,9 @@ partner does not implement the task or make decisions for the user.
 
 - The two skills are Markdown instructions with no runtime dependencies,
   hooks, background services, or executable integration code.
-- Automatic skill selection depends on the host and model, and the caller
-  requires subagent spawning. Use the explicit call above when you need to
-  ensure that the dialogue starts.
+- Automatic skill selection depends on the host and model. Use the explicit
+  call above to request the caller directly. If subagent spawning is
+  unavailable, the dialogue will not start.
 - The partner may use the same model or provider. It creates another line of
   inquiry, not a guarantee of independence, correctness, or improved accuracy.
 - The dialogue adds agent turns, time, and token usage. It stops when another
