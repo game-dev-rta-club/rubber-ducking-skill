@@ -1,7 +1,7 @@
 {
   "name": "rubber-ducking-skill",
   "version": "2.0.0",
-  "description": "Independent second-pass review for AI coding agents.",
+  "description": "Ongoing subagent dialogue for non-trivial AI agent work.",
   "author": {
     "name": "Game Dev RTA Club",
     "url": "https://github.com/game-dev-rta-club"
@@ -12,8 +12,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Rubber Ducking Skill",
-    "shortDescription": "Independent second-pass review for agent work.",
-    "longDescription": "A caller and partner pair that pressure-tests plans, decisions, implementations, and final drafts.",
+    "shortDescription": "A thinking partner at key checkpoints.",
+    "longDescription": "Starts and revisits a focused subagent dialogue to challenge assumptions as plans, evidence, implementations, and answers evolve.",
     "developerName": "Game Dev RTA Club",
     "category": "Productivity",
     "capabilities": [

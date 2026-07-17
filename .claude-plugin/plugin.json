@@ -1,7 +1,7 @@
 {
   "name": "rubber-ducking-skill",
   "version": "2.0.0",
-  "description": "Independent second-pass review for AI coding agents.",
+  "description": "Ongoing subagent dialogue for non-trivial AI agent work.",
   "author": {
     "name": "Game Dev RTA Club"
   },

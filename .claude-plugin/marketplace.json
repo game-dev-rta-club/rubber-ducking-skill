@@ -1,7 +1,7 @@
 {
   "name": "game-dev-rta-club",
   "metadata": {
-    "description": "Independent second-pass review for AI coding agents."
+    "description": "Ongoing subagent dialogue for non-trivial AI agent work."
   },
   "owner": {
     "name": "Game Dev RTA Club"
@@ -13,7 +13,7 @@
         "source": "github",
         "repo": "game-dev-rta-club/rubber-ducking-skill"
       },
-      "description": "A caller and partner pair for focused independent review."
+      "description": "A subagent thinking partner that revisits work at key checkpoints."
     }
   ]
 }

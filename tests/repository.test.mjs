@@ -97,7 +97,8 @@ test("plugin metadata presents one rubber-ducking product", () => {
 
   assert.equal(codexPlugin.name, "rubber-ducking-skill");
   assert.equal(claudePlugin.name, "rubber-ducking-skill");
-  assert.match(publicMetadata, /rubber-duck|independent second-pass review/i);
+  assert.match(publicMetadata, /subagent/i);
+  assert.match(publicMetadata, /thinking partner|key checkpoints/i);
   assert.doesNotMatch(publicMetadata, /skill collection|skill library/i);
 });
 

@@ -4,46 +4,53 @@
 [![Release](https://img.shields.io/github/v/release/game-dev-rta-club/rubber-ducking-skill)](https://github.com/game-dev-rta-club/rubber-ducking-skill/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Catch weak assumptions before they become actions or answers.**
+**Install once. Give your agent a second line of inquiry as the work evolves.**
 
-Rubber Ducking adds a separate review pass to Codex and Claude Code. A fresh
-partner challenges the main agent's plan, evidence, implementation, and final
-answer without taking over the task.
-
-```text
-Your request -> partner checks direction -> agent works
-             -> partner checks result -> final answer
-```
-
-The review is designed to surface contradictions, missing evidence, missed
-requirements, and unnecessary complexity while they can still be corrected.
-It does not claim to guarantee correctness.
-
-## What a review looks like
-
-A review stays focused on the highest-leverage gap instead of producing a long
-list of generic suggestions.
+Rubber Ducking is an Agent Skill for Codex and Claude Code. It is designed to
+activate across non-trivial planning, implementation, debugging, research, and
+writing. Once active, the caller starts a separate subagent partner, returns
+to that dialogue at key checkpoints, and checks again before answering. You do
+not have to orchestrate the subagent yourself.
 
 ```text
-Plan:
-Add a fallback because the primary API might be unavailable.
+You: Find why CI is flaky, fix it, and verify the result.
 
-Partner:
-Material gap: There is no evidence that the primary path fails or that a
-second path is required.
+Before work
+  Agent: I will start by treating this as a test bug.
+  Partner: What evidence separates a test failure from a runner failure?
+  Agent: Successful runs use an earlier runner image. I will test that
+         difference first.
 
-Next action:
-Verify the actual failure modes before adding the fallback.
+Evidence changed
+  Partner: Material gap: One failed run is not enough.
+           Next action: Compare all runs since the image changed.
+  Agent: Every failure starts after that change, and pinning the previous
+         image makes the test pass. I will fix the runner configuration.
+
+Before answer
+  Partner: Material gap: none. Next action: none.
 ```
 
-Use it to pressure-test work such as:
+One request; the caller handles the subagent dialogue as the work changes.
 
-- a migration or implementation plan before making changes
-- a bug fix whose root cause is still uncertain
-- a research conclusion supported by limited evidence
-- a final answer that may have missed a user requirement
+## Why it is different
 
-## Install
+When one agent plans, acts, and answers along a single reasoning trajectory,
+early assumptions and blind spots can reinforce themselves instead of being
+re-examined. Rubber Ducking inserts a focused thinking partner into that
+trajectory while the task is still in progress.
+
+| Approach | Difference |
+| --- | --- |
+| Checklist review | A checklist says what to inspect; the caller also manages when to bring the partner back into the task. |
+| Ordinary rubber duck | A passive duck listens; the partner returns a focused question or correction. |
+| One-shot subagent review | A one-shot review inspects one snapshot; Rubber Ducking revisits the same dialogue at material checkpoints. |
+
+Use it across migration plans, uncertain bug fixes, implementation decisions,
+research conclusions, and user-facing drafts. The caller skips greetings,
+simple answers, and other work where another dialogue would add little value.
+
+## Quick start
 
 ### Codex
 
@@ -59,29 +66,27 @@ claude plugin marketplace add game-dev-rta-club/rubber-ducking-skill
 claude plugin install rubber-ducking-skill@game-dev-rta-club
 ```
 
-## Use
-
-Ask for the caller when you want an explicit review:
+After installation, give your agent a non-trivial task as usual. To verify the
+setup with an explicit call, try:
 
 ```text
-Use rubber-duck-caller to pressure-test this migration plan before changing production.
+Use rubber-duck-caller to investigate why this test is flaky, fix it, and verify the result.
 ```
-
-The caller is also designed to activate for non-trivial work when the host
-recognizes its skill description. It skips greetings, simple answers, and
-other tasks where a second pass would add little value.
 
 ## How it works
 
 1. [`rubber-duck-caller`](skills/rubber-duck-caller/SKILL.md) opens a fresh
-   partner conversation before substantive work.
+   partner conversation before substantive work and transfers a self-contained
+   working brief.
 2. [`rubber-duck-partner`](skills/rubber-duck-partner/SKILL.md) challenges the
-   direction with the highest-leverage question or correction.
-3. The caller checks again when evidence or decisions change and before the
-   final answer. Each check reports at most one material gap and one next
-   action; the dialogue ends when neither remains.
+   direction with the highest-leverage question or correction without taking
+   over the task.
+3. The caller revisits the same dialogue when evidence, decisions, results, or
+   the proposed answer change. It checks once more before replying.
+4. Each check reports at most one material gap and one next action. The
+   dialogue ends when neither remains.
 
-The review contract concentrates on four questions:
+The partner concentrates on four questions:
 
 | Check | Question |
 | --- | --- |
@@ -90,17 +95,20 @@ The review contract concentrates on four questions:
 | Simplicity | Is each fallback, branch, or extra layer required by evidence? |
 | Completion | Is the highest-leverage gap resolved before the answer is sent? |
 
-The caller remains responsible for the work. The partner critiques its current
-direction but does not implement the task or make decisions for the user.
+The caller remains responsible for the work and decides what to adopt. The
+partner does not implement the task or make decisions for the user.
 
 ## Trust and limits
 
 - The two skills are Markdown instructions with no runtime dependencies,
   hooks, background services, or executable integration code.
-- A separate review pass may still use the same model or provider, so it is not
-  a substitute for human review or independent testing.
-- Reviews add agent turns, time, and token usage. The caller skips trivial work
-  and stops when another exchange would not materially improve the result.
+- Automatic skill selection depends on the host and model, and the caller
+  requires subagent spawning. Use the explicit call above when you need to
+  ensure that the dialogue starts.
+- The partner may use the same model or provider. It creates another line of
+  inquiry, not a guarantee of independence, correctness, or improved accuracy.
+- The dialogue adds agent turns, time, and token usage. It stops when another
+  exchange would not materially improve the result.
 - Review the source before installing and approve tool actions deliberately.
   Report vulnerabilities through [SECURITY.md](SECURITY.md).
 
