@@ -38,19 +38,16 @@ adds time and token use, and cannot guarantee a correct answer.
 The Rubber Duck is another subagent, not a human reviewer. The caller returns
 to the same dialogue as the current task changes.
 
-## One task, two roles
+## Design principle
 
-One agent owns the task. A separate Rubber Duck questions the work without
-taking it over.
+On complex tasks, a single agent can widen the scope, keep several plausible
+paths alive, or carry a weak assumption forward. The context that makes its
+work coherent can also make those patterns harder to notice.
 
-The context that keeps the working agent coherent can also carry weak
-assumptions forward. Returning to the same Rubber Duck dialogue when evidence
-changes or a decision needs to be made creates counterpressure while the path
-can still change.
-
-The value comes from role separation and timing, not guaranteed independence or
-correctness. It applies across non-trivial planning, implementation, debugging,
-research, and writing; simple requests are skipped.
+Rubber Ducking counterbalances that continuity with a separate role. At key
+moments, one focused question or correction from the Rubber Duck helps the
+working agent narrow the work, test the direction, and choose the next
+step—without handing over ownership.
 
 ## Quick start
 
