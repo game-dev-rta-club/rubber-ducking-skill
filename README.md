@@ -38,6 +38,16 @@ adds time and token use, and cannot guarantee a correct answer.
 The Rubber Duck is another subagent, not a human reviewer. The caller returns
 to the same dialogue as the current task changes.
 
+## Caution
+
+Benchmarks run so far have not shown improved task performance.
+Counterbalancing agent tendencies such as carrying a weak assumption forward
+or widening the scope appears to offer some value during development.
+
+This repository remains an experiment under active refinement. It is
+recommended for people who want to try the behavior as it evolves and evaluate
+it on their own tasks.
+
 ## Design principle
 
 On complex tasks, a single agent can widen the scope, keep several plausible
